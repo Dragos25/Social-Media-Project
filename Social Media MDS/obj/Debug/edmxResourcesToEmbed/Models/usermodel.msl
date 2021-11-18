@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="socialappdbModelStoreContainer" CdmEntityContainer="socialappdbEntities1">
+    <EntitySetMapping Name="actions">
+      <EntityTypeMapping TypeName="socialappdbModel.action">
+        <MappingFragment StoreEntitySet="actions">
+          <ScalarProperty Name="type_action" ColumnName="type_action" />
+          <ScalarProperty Name="text_pattern" ColumnName="text_pattern" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="socialappdbModel.comment">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="id_comment" ColumnName="id_comment" />
+          <ScalarProperty Name="comment_text" ColumnName="comment_text" />
+          <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="direct_messages">
+      <EntityTypeMapping TypeName="socialappdbModel.direct_messages">
+        <MappingFragment StoreEntitySet="direct_messages">
+          <ScalarProperty Name="id_message" ColumnName="id_message" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="read_check" ColumnName="read_check" />
+          <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="friends">
+      <EntityTypeMapping TypeName="socialappdbModel.friend">
+        <MappingFragment StoreEntitySet="friends">
+          <ScalarProperty Name="id_user1" ColumnName="id_user1" />
+          <ScalarProperty Name="id_user2" ColumnName="id_user2" />
+          <ScalarProperty Name="add_date" ColumnName="add_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="notifications">
+      <EntityTypeMapping TypeName="socialappdbModel.notification">
+        <MappingFragment StoreEntitySet="notifications">
+          <ScalarProperty Name="id_notification" ColumnName="id_notification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="posts">
+      <EntityTypeMapping TypeName="socialappdbModel.post">
+        <MappingFragment StoreEntitySet="posts">
+          <ScalarProperty Name="post_id" ColumnName="post_id" />
+          <ScalarProperty Name="post_text" ColumnName="post_text" />
+          <ScalarProperty Name="picture" ColumnName="picture" />
+          <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reaction_type">
+      <EntityTypeMapping TypeName="socialappdbModel.reaction_type">
+        <MappingFragment StoreEntitySet="reaction_type">
+          <ScalarProperty Name="id_reaction_type" ColumnName="id_reaction_type" />
+          <ScalarProperty Name="reaction_type1" ColumnName="reaction_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reactions">
+      <EntityTypeMapping TypeName="socialappdbModel.reaction">
+        <MappingFragment StoreEntitySet="reactions">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="post_id" ColumnName="post_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="socialappdbModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="register_date" ColumnName="register_date" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="job" ColumnName="job" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK__notificat__type___0F624AF8" TypeName="socialappdbModel.FK__notificat__type___0F624AF8" StoreEntitySet="notifications">
+      <EndProperty Name="actions">
+        <ScalarProperty Name="type_action" ColumnName="type_action" />
+      </EndProperty>
+      <EndProperty Name="notifications">
+        <ScalarProperty Name="id_notification" ColumnName="id_notification" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__comments__id_use__14270015" TypeName="socialappdbModel.FK__comments__id_use__14270015" StoreEntitySet="comments">
+      <EndProperty Name="users">
+        <ScalarProperty Name="id_user" ColumnName="id_user" />
+      </EndProperty>
+      <EndProperty Name="comments">
+        <ScalarProperty Name="id_comment" ColumnName="id_comment" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__comments__post_i__151B244E" TypeName="socialappdbModel.FK__comments__post_i__151B244E" StoreEntitySet="comments">
+      <EndProperty Name="posts">
+        <ScalarProperty Name="post_id" ColumnName="post_id" />
+      </EndProperty>
+      <EndProperty Name="comments">
+        <ScalarProperty Name="id_comment" ColumnName="id_comment" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__direct_me__creat__08B54D69" TypeName="socialappdbModel.FK__direct_me__creat__08B54D69" StoreEntitySet="direct_messages">
+      <EndProperty Name="users">
+        <ScalarProperty Name="id_user" ColumnName="creator" />
+      </EndProperty>
+      <EndProperty Name="direct_messages">
+        <ScalarProperty Name="id_message" ColumnName="id_message" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="creator" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__direct_me__id_re__09A971A2" TypeName="socialappdbModel.FK__direct_me__id_re__09A971A2" StoreEntitySet="direct_messages">
+      <EndProperty Name="users">
+        <ScalarProperty Name="id_user" ColumnName="id_recipient" />
+      </EndProperty>
+      <EndProperty Name="direct_messages">
+        <ScalarProperty Name="id_message" ColumnName="id_message" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="id_recipient" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__direct_me__paren__0A9D95DB" TypeName="socialappdbModel.FK__direct_me__paren__0A9D95DB" StoreEntitySet="direct_messages">
+      <EndProperty Name="direct_messages">
+        <ScalarProperty Name="id_message" ColumnName="parent" />
+      </EndProperty>
+      <EndProperty Name="direct_messages1">
+        <ScalarProperty Name="id_message" ColumnName="id_message" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="parent" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__notificat__id_me__114A936A" TypeName="socialappdbModel.FK__notificat__id_me__114A936A" StoreEntitySet="notifications">
+      <EndProperty Name="direct_messages">
+        <ScalarProperty Name="id_message" ColumnName="id_message" />
+      </EndProperty>
+      <EndProperty Name="notifications">
+        <ScalarProperty Name="id_notification" ColumnName="id_notification" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="id_message" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__notificat__id_re__0D7A0286" TypeName="socialappdbModel.FK__notificat__id_re__0D7A0286" StoreEntitySet="notifications">
+      <EndProperty Name="users">
+        <ScalarProperty Name="id_user" ColumnName="id_recipient" />
+      </EndProperty>
+      <EndProperty Name="notifications">
+        <ScalarProperty Name="id_notification" ColumnName="id_notification" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__notificat__id_se__0E6E26BF" TypeName="socialappdbModel.FK__notificat__id_se__0E6E26BF" StoreEntitySet="notifications">
+      <EndProperty Name="users">
+        <ScalarProperty Name="id_user" ColumnName="id_sender" />
+      </EndProperty>
+      <EndProperty Name="notifications">
+        <ScalarProperty Name="id_notification" ColumnName="id_notification" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="id_sender" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__notificat__post___10566F31" TypeName="socialappdbModel.FK__notificat__post___10566F31" StoreEntitySet="notifications">
+      <EndProperty Name="posts">
+        <ScalarProperty Name="post_id" ColumnName="post_id" />
+      </EndProperty>
+      <EndProperty Name="notifications">
+        <ScalarProperty Name="id_notification" ColumnName="id_notification" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="post_id" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__posts__creator__7C4F7684" TypeName="socialappdbModel.FK__posts__creator__7C4F7684" StoreEntitySet="posts">
+      <EndProperty Name="users">
+        <ScalarProperty Name="id_user" ColumnName="creator" />
+      </EndProperty>
+      <EndProperty Name="posts">
+        <ScalarProperty Name="post_id" ColumnName="post_id" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="creator" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__posts__parent__7D439ABD" TypeName="socialappdbModel.FK__posts__parent__7D439ABD" StoreEntitySet="posts">
+      <EndProperty Name="posts">
+        <ScalarProperty Name="post_id" ColumnName="parent" />
+      </EndProperty>
+      <EndProperty Name="posts1">
+        <ScalarProperty Name="post_id" ColumnName="post_id" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="parent" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__reactions__id_re__03F0984C" TypeName="socialappdbModel.FK__reactions__id_re__03F0984C" StoreEntitySet="reactions">
+      <EndProperty Name="reaction_type">
+        <ScalarProperty Name="id_reaction_type" ColumnName="id_reaction_type" />
+      </EndProperty>
+      <EndProperty Name="reactions">
+        <ScalarProperty Name="id_user" ColumnName="id_user" />
+        <ScalarProperty Name="post_id" ColumnName="post_id" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="id_reaction_type" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__users__id_parten__71D1E811" TypeName="socialappdbModel.FK__users__id_parten__71D1E811" StoreEntitySet="users">
+      <EndProperty Name="users">
+        <ScalarProperty Name="id_user" ColumnName="id_partener" />
+      </EndProperty>
+      <EndProperty Name="users1">
+        <ScalarProperty Name="id_user" ColumnName="id_user" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="id_partener" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="blocklist" TypeName="socialappdbModel.blocklist" StoreEntitySet="blocklist">
+      <EndProperty Name="users">
+        <ScalarProperty Name="id_user" ColumnName="id_user1" />
+      </EndProperty>
+      <EndProperty Name="users1">
+        <ScalarProperty Name="id_user" ColumnName="id_user2" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

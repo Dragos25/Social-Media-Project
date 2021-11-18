@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="socialappdbModelStoreContainer" CdmEntityContainer="socialappdbEntities">
+    <EntitySetMapping Name="actions">
+      <EntityTypeMapping TypeName="socialappdbModel.action">
+        <MappingFragment StoreEntitySet="actions">
+          <ScalarProperty Name="type_action" ColumnName="type_action" />
+          <ScalarProperty Name="text_pattern" ColumnName="text_pattern" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="socialappdbModel.comment">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="id_comment" ColumnName="id_comment" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="post_id" ColumnName="post_id" />
+          <ScalarProperty Name="comment_text" ColumnName="comment_text" />
+          <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="direct_messages">
+      <EntityTypeMapping TypeName="socialappdbModel.direct_messages">
+        <MappingFragment StoreEntitySet="direct_messages">
+          <ScalarProperty Name="id_message" ColumnName="id_message" />
+          <ScalarProperty Name="creator" ColumnName="creator" />
+          <ScalarProperty Name="id_recipient" ColumnName="id_recipient" />
+          <ScalarProperty Name="parent" ColumnName="parent" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="read_check" ColumnName="read_check" />
+          <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="friends">
+      <EntityTypeMapping TypeName="socialappdbModel.friend">
+        <MappingFragment StoreEntitySet="friends">
+          <ScalarProperty Name="id_user1" ColumnName="id_user1" />
+          <ScalarProperty Name="id_user2" ColumnName="id_user2" />
+          <ScalarProperty Name="add_date" ColumnName="add_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="notifications">
+      <EntityTypeMapping TypeName="socialappdbModel.notification">
+        <MappingFragment StoreEntitySet="notifications">
+          <ScalarProperty Name="id_notification" ColumnName="id_notification" />
+          <ScalarProperty Name="id_recipient" ColumnName="id_recipient" />
+          <ScalarProperty Name="id_sender" ColumnName="id_sender" />
+          <ScalarProperty Name="type_action" ColumnName="type_action" />
+          <ScalarProperty Name="post_id" ColumnName="post_id" />
+          <ScalarProperty Name="id_message" ColumnName="id_message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="posts">
+      <EntityTypeMapping TypeName="socialappdbModel.post">
+        <MappingFragment StoreEntitySet="posts">
+          <ScalarProperty Name="post_id" ColumnName="post_id" />
+          <ScalarProperty Name="creator" ColumnName="creator" />
+          <ScalarProperty Name="parent" ColumnName="parent" />
+          <ScalarProperty Name="post_text" ColumnName="post_text" />
+          <ScalarProperty Name="picture" ColumnName="picture" />
+          <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reaction_type">
+      <EntityTypeMapping TypeName="socialappdbModel.reaction_type">
+        <MappingFragment StoreEntitySet="reaction_type">
+          <ScalarProperty Name="id_reaction_type" ColumnName="id_reaction_type" />
+          <ScalarProperty Name="reaction_type1" ColumnName="reaction_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reactions">
+      <EntityTypeMapping TypeName="socialappdbModel.reaction">
+        <MappingFragment StoreEntitySet="reactions">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="post_id" ColumnName="post_id" />
+          <ScalarProperty Name="id_reaction_type" ColumnName="id_reaction_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="socialappdbModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="register_date" ColumnName="register_date" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="job" ColumnName="job" />
+          <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+          <ScalarProperty Name="id_partener" ColumnName="id_partener" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="blocklist" TypeName="socialappdbModel.blocklist" StoreEntitySet="blocklist">
+      <EndProperty Name="users">
+        <ScalarProperty Name="id_user" ColumnName="id_user1" />
+      </EndProperty>
+      <EndProperty Name="users1">
+        <ScalarProperty Name="id_user" ColumnName="id_user2" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

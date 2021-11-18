@@ -1,0 +1,31 @@
+﻿@model Social_Media_MDS.Models.user
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>Profil</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @{
+                if (Session["FirstName"] != null)
+                {
+                    var firstName = Session["FirstName"].ToString();
+                    <p>Hello, @firstName!</p>
+                }
+                else
+                {
+                    <p>You're not logged in!</p>
+                }
+            }
+
+        </dt>
+    </dl>
+</div>

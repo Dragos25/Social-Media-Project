@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="socialappdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="actions">
+    <Key>
+      <PropertyRef Name="type_action" />
+    </Key>
+    <Property Name="type_action" Type="int" Nullable="false" />
+    <Property Name="text_pattern" Type="varchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="blocklist">
+    <Key>
+      <PropertyRef Name="id_user1" />
+      <PropertyRef Name="id_user2" />
+    </Key>
+    <Property Name="id_user1" Type="int" Nullable="false" />
+    <Property Name="id_user2" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="id_comment" />
+    </Key>
+    <Property Name="id_comment" Type="int" Nullable="false" />
+    <Property Name="id_user" Type="int" Nullable="false" />
+    <Property Name="post_id" Type="int" Nullable="false" />
+    <Property Name="comment_text" Type="text" Nullable="false" />
+    <Property Name="creation_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+  </EntityType>
+  <EntityType Name="direct_messages">
+    <Key>
+      <PropertyRef Name="id_message" />
+    </Key>
+    <Property Name="id_message" Type="int" Nullable="false" />
+    <Property Name="creator" Type="int" />
+    <Property Name="id_recipient" Type="int" />
+    <Property Name="parent" Type="int" />
+    <Property Name="content" Type="text" Nullable="false" />
+    <Property Name="read_check" Type="tinyint" Nullable="false" />
+    <Property Name="creation_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="friends">
+    <Key>
+      <PropertyRef Name="id_user1" />
+      <PropertyRef Name="id_user2" />
+    </Key>
+    <Property Name="id_user1" Type="int" Nullable="false" />
+    <Property Name="id_user2" Type="int" Nullable="false" />
+    <Property Name="add_date" Type="date" />
+  </EntityType>
+  <EntityType Name="notifications">
+    <Key>
+      <PropertyRef Name="id_notification" />
+    </Key>
+    <Property Name="id_notification" Type="int" Nullable="false" />
+    <Property Name="id_recipient" Type="int" Nullable="false" />
+    <Property Name="id_sender" Type="int" />
+    <Property Name="type_action" Type="int" Nullable="false" />
+    <Property Name="post_id" Type="int" />
+    <Property Name="id_message" Type="int" />
+  </EntityType>
+  <EntityType Name="posts">
+    <Key>
+      <PropertyRef Name="post_id" />
+    </Key>
+    <Property Name="post_id" Type="int" Nullable="false" />
+    <Property Name="creator" Type="int" />
+    <Property Name="parent" Type="int" />
+    <Property Name="post_text" Type="text" />
+    <Property Name="picture" Type="varchar" MaxLength="50" />
+    <Property Name="creation_date" Type="date" />
+  </EntityType>
+  <EntityType Name="reaction_type">
+    <Key>
+      <PropertyRef Name="id_reaction_type" />
+    </Key>
+    <Property Name="id_reaction_type" Type="int" Nullable="false" />
+    <Property Name="reaction_type" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="reactions">
+    <Key>
+      <PropertyRef Name="id_user" />
+      <PropertyRef Name="post_id" />
+    </Key>
+    <Property Name="id_user" Type="int" Nullable="false" />
+    <Property Name="post_id" Type="int" Nullable="false" />
+    <Property Name="id_reaction_type" Type="int" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="int" Nullable="false" />
+    <Property Name="register_date" Type="date" />
+    <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="sex" Type="varchar" MaxLength="10" />
+    <Property Name="date_of_birth" Type="date" />
+    <Property Name="description" Type="varchar" MaxLength="500" />
+    <Property Name="job" Type="varchar" MaxLength="100" />
+    <Property Name="isAdmin" Type="tinyint" />
+    <Property Name="marital_status" Type="varchar" MaxLength="20" />
+    <Property Name="id_partener" Type="int" />
+  </EntityType>
+  <Association Name="FK__blocklist__id_us__74AE54BC">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="blocklist" Type="Self.blocklist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="blocklist">
+        <PropertyRef Name="id_user1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__blocklist__id_us__75A278F5">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="blocklist" Type="Self.blocklist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="blocklist">
+        <PropertyRef Name="id_user2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comments__id_use__14270015">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comments__post_i__151B244E">
+    <End Role="posts" Type="Self.posts" Multiplicity="1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="posts">
+        <PropertyRef Name="post_id" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="post_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__direct_me__creat__08B54D69">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="direct_messages" Type="Self.direct_messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="direct_messages">
+        <PropertyRef Name="creator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__direct_me__id_re__09A971A2">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="direct_messages" Type="Self.direct_messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="direct_messages">
+        <PropertyRef Name="id_recipient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__direct_me__paren__0A9D95DB">
+    <End Role="direct_messages" Type="Self.direct_messages" Multiplicity="0..1" />
+    <End Role="direct_messages1" Type="Self.direct_messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="direct_messages">
+        <PropertyRef Name="id_message" />
+      </Principal>
+      <Dependent Role="direct_messages1">
+        <PropertyRef Name="parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__friends__id_user__787EE5A0">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="friends" Type="Self.friends" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="friends">
+        <PropertyRef Name="id_user1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__friends__id_user__797309D9">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="friends" Type="Self.friends" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="friends">
+        <PropertyRef Name="id_user2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__notificat__id_me__114A936A">
+    <End Role="direct_messages" Type="Self.direct_messages" Multiplicity="0..1" />
+    <End Role="notifications" Type="Self.notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="direct_messages">
+        <PropertyRef Name="id_message" />
+      </Principal>
+      <Dependent Role="notifications">
+        <PropertyRef Name="id_message" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__notificat__id_re__0D7A0286">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="notifications" Type="Self.notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="notifications">
+        <PropertyRef Name="id_recipient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__notificat__id_se__0E6E26BF">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="notifications" Type="Self.notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="notifications">
+        <PropertyRef Name="id_sender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__notificat__post___10566F31">
+    <End Role="posts" Type="Self.posts" Multiplicity="0..1" />
+    <End Role="notifications" Type="Self.notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="posts">
+        <PropertyRef Name="post_id" />
+      </Principal>
+      <Dependent Role="notifications">
+        <PropertyRef Name="post_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__notificat__type___0F624AF8">
+    <End Role="actions" Type="Self.actions" Multiplicity="1" />
+    <End Role="notifications" Type="Self.notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="actions">
+        <PropertyRef Name="type_action" />
+      </Principal>
+      <Dependent Role="notifications">
+        <PropertyRef Name="type_action" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__posts__creator__7C4F7684">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="posts" Type="Self.posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="posts">
+        <PropertyRef Name="creator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__posts__parent__7D439ABD">
+    <End Role="posts" Type="Self.posts" Multiplicity="0..1" />
+    <End Role="posts1" Type="Self.posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="posts">
+        <PropertyRef Name="post_id" />
+      </Principal>
+      <Dependent Role="posts1">
+        <PropertyRef Name="parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reactions__id_re__03F0984C">
+    <End Role="reaction_type" Type="Self.reaction_type" Multiplicity="0..1" />
+    <End Role="reactions" Type="Self.reactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reaction_type">
+        <PropertyRef Name="id_reaction_type" />
+      </Principal>
+      <Dependent Role="reactions">
+        <PropertyRef Name="id_reaction_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reactions__id_us__02084FDA">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="reactions" Type="Self.reactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="reactions">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reactions__post___02FC7413">
+    <End Role="posts" Type="Self.posts" Multiplicity="1" />
+    <End Role="reactions" Type="Self.reactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="posts">
+        <PropertyRef Name="post_id" />
+      </Principal>
+      <Dependent Role="reactions">
+        <PropertyRef Name="post_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__users__id_parten__71D1E811">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="users1" Type="Self.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="users1">
+        <PropertyRef Name="id_partener" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="socialappdbModelStoreContainer">
+    <EntitySet Name="actions" EntityType="Self.actions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="blocklist" EntityType="Self.blocklist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="direct_messages" EntityType="Self.direct_messages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="friends" EntityType="Self.friends" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="notifications" EntityType="Self.notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="posts" EntityType="Self.posts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reaction_type" EntityType="Self.reaction_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reactions" EntityType="Self.reactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__blocklist__id_us__74AE54BC" Association="Self.FK__blocklist__id_us__74AE54BC">
+      <End Role="users" EntitySet="users" />
+      <End Role="blocklist" EntitySet="blocklist" />
+    </AssociationSet>
+    <AssociationSet Name="FK__blocklist__id_us__75A278F5" Association="Self.FK__blocklist__id_us__75A278F5">
+      <End Role="users" EntitySet="users" />
+      <End Role="blocklist" EntitySet="blocklist" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comments__id_use__14270015" Association="Self.FK__comments__id_use__14270015">
+      <End Role="users" EntitySet="users" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comments__post_i__151B244E" Association="Self.FK__comments__post_i__151B244E">
+      <End Role="posts" EntitySet="posts" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__direct_me__creat__08B54D69" Association="Self.FK__direct_me__creat__08B54D69">
+      <End Role="users" EntitySet="users" />
+      <End Role="direct_messages" EntitySet="direct_messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__direct_me__id_re__09A971A2" Association="Self.FK__direct_me__id_re__09A971A2">
+      <End Role="users" EntitySet="users" />
+      <End Role="direct_messages" EntitySet="direct_messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__direct_me__paren__0A9D95DB" Association="Self.FK__direct_me__paren__0A9D95DB">
+      <End Role="direct_messages" EntitySet="direct_messages" />
+      <End Role="direct_messages1" EntitySet="direct_messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__friends__id_user__787EE5A0" Association="Self.FK__friends__id_user__787EE5A0">
+      <End Role="users" EntitySet="users" />
+      <End Role="friends" EntitySet="friends" />
+    </AssociationSet>
+    <AssociationSet Name="FK__friends__id_user__797309D9" Association="Self.FK__friends__id_user__797309D9">
+      <End Role="users" EntitySet="users" />
+      <End Role="friends" EntitySet="friends" />
+    </AssociationSet>
+    <AssociationSet Name="FK__notificat__id_me__114A936A" Association="Self.FK__notificat__id_me__114A936A">
+      <End Role="direct_messages" EntitySet="direct_messages" />
+      <End Role="notifications" EntitySet="notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__notificat__id_re__0D7A0286" Association="Self.FK__notificat__id_re__0D7A0286">
+      <End Role="users" EntitySet="users" />
+      <End Role="notifications" EntitySet="notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__notificat__id_se__0E6E26BF" Association="Self.FK__notificat__id_se__0E6E26BF">
+      <End Role="users" EntitySet="users" />
+      <End Role="notifications" EntitySet="notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__notificat__post___10566F31" Association="Self.FK__notificat__post___10566F31">
+      <End Role="posts" EntitySet="posts" />
+      <End Role="notifications" EntitySet="notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__notificat__type___0F624AF8" Association="Self.FK__notificat__type___0F624AF8">
+      <End Role="actions" EntitySet="actions" />
+      <End Role="notifications" EntitySet="notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__posts__creator__7C4F7684" Association="Self.FK__posts__creator__7C4F7684">
+      <End Role="users" EntitySet="users" />
+      <End Role="posts" EntitySet="posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__posts__parent__7D439ABD" Association="Self.FK__posts__parent__7D439ABD">
+      <End Role="posts" EntitySet="posts" />
+      <End Role="posts1" EntitySet="posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reactions__id_re__03F0984C" Association="Self.FK__reactions__id_re__03F0984C">
+      <End Role="reaction_type" EntitySet="reaction_type" />
+      <End Role="reactions" EntitySet="reactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reactions__id_us__02084FDA" Association="Self.FK__reactions__id_us__02084FDA">
+      <End Role="users" EntitySet="users" />
+      <End Role="reactions" EntitySet="reactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reactions__post___02FC7413" Association="Self.FK__reactions__post___02FC7413">
+      <End Role="posts" EntitySet="posts" />
+      <End Role="reactions" EntitySet="reactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__users__id_parten__71D1E811" Association="Self.FK__users__id_parten__71D1E811">
+      <End Role="users" EntitySet="users" />
+      <End Role="users1" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

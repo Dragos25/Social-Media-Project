@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="socialappdbEntities">
+    <EntitySetMapping Name="test">
+      <EntityTypeMapping TypeName="testModel.test">
+        <MappingFragment StoreEntitySet="test">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nume" ColumnName="nume" />
+          <ScalarProperty Name="varsta" ColumnName="varsta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

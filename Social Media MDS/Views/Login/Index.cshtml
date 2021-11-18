@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Please Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+
+    <form method="post" action="/Login/Login">
+        Username:
+        <input type="text" data-val="true"
+               data-val-required="Introduceti username !"
+               id="username" name="username" value=""><br>
+        Password:
+        <input type="password" data-val="true"
+               data-val-required="Introduceti parola !"
+               id="Password" name="Password"><br>
+        <button type="submit">Login</button>
+        <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>">
+    </form>
+
+    <input type="button" value="Sign Up" onclick="location.href='@Url.Action("Create", "users")'" />
+</body>
+</html>
+
+
